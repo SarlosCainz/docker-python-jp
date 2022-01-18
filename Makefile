@@ -1,6 +1,6 @@
 REGISTRY := sarlos
 NAME := python
-TAG := 3.9
+TAG := 3.10
 
 build:
 	docker build -t $(REGISTRY)/$(NAME):$(TAG) .
