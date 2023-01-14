@@ -1,13 +1,10 @@
-FROM python:3.9
+FROM alpine:3.17
 
-RUN set -eu \
- && apt-get update \
- && apt-get install -y --no-install-recommends locales locales-all \
- && apt-get clean
+RUN apk add --update --no-cache python3~=3.10 py3-pip
+RUN apk add --no-cache tzdata \
+ && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
+ && apk del tzdata
 
 RUN pip install pipenv
 
-RUN update-locale LANG=ja_JP.utf8
-
-ENV LC_ALL ja_JP.utf8
-ENV TZ Asia/Tokyo
+ENTRYPOINT ["python3"]
